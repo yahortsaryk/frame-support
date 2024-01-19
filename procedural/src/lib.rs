@@ -649,10 +649,16 @@ pub fn __create_tt_macro(input: TokenStream) -> TokenStream {
 }
 
 #[proc_macro_attribute]
-pub fn storage_alias(_: TokenStream, input: TokenStream) -> TokenStream {
-	storage_alias::storage_alias(input.into())
+pub fn storage_alias(attributes: TokenStream, input: TokenStream) -> TokenStream {
+	storage_alias::storage_alias(attributes.into(), input.into())
 		.unwrap_or_else(|r| r.into_compile_error())
 		.into()
+}
+
+/// Generate the counter_prefix related to the storage.
+/// counter_prefix is used by counted storage map.
+fn counter_prefix(prefix: &str) -> String {
+	format!("CounterFor{}", prefix)
 }
 
 /// Used internally to decorate pallet attribute macro stubs when they are erroneously used

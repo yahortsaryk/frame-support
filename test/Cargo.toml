@@ -1,0 +1,57 @@
+[package]
+name = "frame-support-test"
+version = "3.0.0"
+authors = ["Parity Technologies <admin@parity.io>"]
+edition = "2021"
+license = "Apache-2.0"
+publish = false
+homepage = "https://substrate.io"
+repository = "https://github.com/paritytech/substrate/"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+serde = { version = "1.0.136", default-features = false, features = ["derive"] }
+codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = ["derive"] }
+scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
+sp-arithmetic = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+sp-io = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+sp-state-machine = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+frame-support = { version = "4.0.0-dev", default-features = false, path = "../" }
+sp-runtime = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+sp-core = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+sp-std = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+sp-version = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+trybuild = { version = "1.0.74", features = [ "diff" ] }
+pretty_assertions = "1.2.1"
+rustversion = "1.0.6"
+frame-system = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+# The "std" feature for this pallet is never activated on purpose, in order to test construct_runtime error message
+test-pallet = { package = "frame-support-test-pallet", default-features = false, path = "pallet" }
+
+[features]
+default = ["std"]
+std = [
+	"serde/std",
+	"codec/std",
+	"scale-info/std",
+	"frame-support/std",
+	"frame-system/std",
+	"sp-core/std",
+	"sp-std/std",
+	"sp-io/std",
+	"sp-runtime/std",
+	"sp-state-machine",
+	"sp-arithmetic/std",
+	"sp-version/std",
+]
+try-runtime = ["frame-support/try-runtime"]
+# WARNING:
+# Only CI runs with this feature enabled. This feature is for testing stuff related to the FRAME macros
+# in conjunction with rust features.
+frame-feature-testing = []
+frame-feature-testing-2 = []
+# Disable ui tests
+disable-ui-tests = []
+no-metadata-docs = ["frame-support/no-metadata-docs"]

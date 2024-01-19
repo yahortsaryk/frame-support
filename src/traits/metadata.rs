@@ -21,6 +21,7 @@ use codec::{Decode, Encode};
 use impl_trait_for_tuples::impl_for_tuples;
 use sp_runtime::RuntimeDebug;
 use sp_std::prelude::*;
+use sp_std::vec;
 
 /// Provides information about the pallet itself and its setup in the runtime.
 ///

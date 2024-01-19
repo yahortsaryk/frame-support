@@ -1,5 +1,5 @@
 [package]
-name = "frame-support"
+name = "forked-frame-support"
 version = "4.0.0-dev"
 authors = ["Parity Technologies <admin@parity.io>"]
 edition = "2021"
